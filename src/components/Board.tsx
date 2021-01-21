@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BoardState } from '../actions';
 import Square from './Square';
+import calculateWinner from './calclateWinner';
 
 const Board: React.FC<{}> = () => {
   const [state, setState] = useState<BoardState>({
@@ -10,6 +11,9 @@ const Board: React.FC<{}> = () => {
 
   const handleClick = (i: number) => {
     const squares = state.squares.slice();
+    if (calculateWinner(squares) || squares[i]) {
+      return;
+    }
     squares[i] = state.xIsNext ? 'X' : 'O';
     setState({ squares, xIsNext: !state.xIsNext });
   };
@@ -18,7 +22,10 @@ const Board: React.FC<{}> = () => {
     return <Square value={state.squares[i]} onClick={() => handleClick(i)} />;
   };
 
-  const status = `Next player: ${state.xIsNext ? 'X' : 'O'}`;
+  const winner = calculateWinner(state.squares);
+  const status = winner
+    ? `Winner: ${winner}`
+    : `Next player: ${state.xIsNext ? 'X' : 'O'}`;
 
   return (
     <div>
