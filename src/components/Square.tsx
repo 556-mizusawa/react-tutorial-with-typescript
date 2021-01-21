@@ -1,7 +1,7 @@
 import React from 'react';
 import { SquareProps } from '../actions';
 
-const Square = (props: SquareProps) => {
+const Square: React.FC<SquareProps> = (props) => {
   return (
     <>
       <button className="square" onClick={props.onClick}>
