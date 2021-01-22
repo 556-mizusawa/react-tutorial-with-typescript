@@ -7,5 +7,6 @@ export interface SquareProps {
 
 export interface BoardState {
   squares: SquareType[];
-  xIsNext: boolean;
+  xIsNext?: boolean;
+  onClick: (arg0: number) => void;
 }
