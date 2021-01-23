@@ -27,7 +27,7 @@ const App: React.FC<{}> = () => {
 
   const jumpTo = (step: number) => {
     dispatch({
-      history: [{ squares: Array(9).fill(null) }],
+      history: history.concat(),
       stepNumber: step,
       xIsNext: step % 2 === 0,
     });
